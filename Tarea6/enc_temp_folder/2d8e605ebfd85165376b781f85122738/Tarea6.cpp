@@ -67,20 +67,6 @@ void radixSort(List<int>* lista, int base, int sizeLista) {
     delete buckets;
 }
 
-int leerEntero(string mensaje) {
-    string temp;
-    while (true) {
-        try {
-            cout << mensaje;
-            getline(cin >> ws, temp);
-            int numero = stoi(temp);
-            return numero;
-        }
-        catch (...) {
-            cout << "ERROR: Debe ingresar un numero valido.\n";
-        }
-    }
-}
 
 int main() {
     ArrayList<int>* Lista;
@@ -89,15 +75,19 @@ int main() {
     string temp;
     string repetir = "s";
     try {
-        srand(time(0));
         while (repetir == "s" || repetir == "S") {
-            sizeLista = leerEntero("Tamano de la nueva lista: ");
+            cout << "Tamano de la nueva lista: ";
+            getline(cin >> ws, temp);
+            sizeLista = stoi(temp);
             if (sizeLista < 1)
                 throw runtime_error("Tamano debe ser mayor o igual 1.");
-            base = leerEntero("Base numerica: ");
+            cout << "Base numerica: ";
+            getline(cin >> ws, temp);
+            base = stoi(temp);
             if (base < 2)
                 throw runtime_error("La base debe ser mayor o igual a 2.");
             Lista = new ArrayList<int>(sizeLista);
+            srand(time(0)); 
             for (int i = 0; i < sizeLista ; i++) {
                 int numeroRandom = rand() % 1000;
                 Lista->append(numeroRandom);
