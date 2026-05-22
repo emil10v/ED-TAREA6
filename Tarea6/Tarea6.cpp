@@ -14,72 +14,36 @@ using std::runtime_error;
 using std::getline;
 using std::ws;
 
-int getCantDigitos(List<int>* lista, int base) {
-    int mayor = -1;
-    for (lista->goToStart(); !lista->atEnd(); lista->next()) {
-        int num = lista->getElement();
-        if (num > mayor)
-            mayor = num;
-    }
-    int digits = 0;
-    while (mayor) {
-        mayor /= base;
-        digits++;
-    }
-    return digits;
-}
-
-
-void radixSort(List<int>* lista, int base, int sizeLista) {
-    ArrayList<LinkedList<int>*>* buckets = new ArrayList<LinkedList<int>*>(base);
+void radixSort(ArrayList<int>* lista, int base) {
+    ArrayList<LinkedList<int>*>* buckets;
     int digitos = getCantDigitos(lista, base);
-    for (int i = 0; i < base; i++) {
+    for (int i = 0; i < base i++) {
         buckets->append(new LinkedList<int>()); 
     }
-    int divisor = 1;
     for (int i = 0; i < digitos; i++) {
         for (lista->goToStart(); !lista->atEnd(); lista->next()) {
             int numero = lista->getElement();
-            int digito = (numero / divisor) % base;
-            buckets->goToPos(digito);
-            List<int>* bucket = buckets->getElement();
-            bucket->append(numero);
+            int digito = numero % base;
+            buckets[digito].append(numero);
         }
-		lista->clear();
-        buckets->goToStart();
-        for (buckets->goToStart(); !buckets->atEnd(); buckets->next()) {
-            LinkedList<int>* bucket = buckets->getElement();
-            bucket->goToStart();
-            int sizeBucket = bucket->getSize();
-            for (int i = 0; i < sizeBucket; i++) {
-                int numero = bucket->remove();
-                lista->append(numero);
-            }
-        }
-        divisor *= base;
     }
-    buckets->goToStart();
-    for (int i = 0; i < base; i++) {
-        LinkedList<int>* bucket = buckets->getElement();
-        delete bucket;
-        buckets->next();
-    }
+    for (int i = 0; i < base; i++) delete buckets->getAt(i);
     delete buckets;
 }
 
-int leerEntero(string mensaje) {
-    string temp;
-    while (true) {
-        try {
-            cout << mensaje;
-            getline(cin >> ws, temp);
-            int numero = stoi(temp);
-            return numero;
-        }
-        catch (...) {
-            cout << "ERROR: Debe ingresar un numero valido.\n";
-        }
+int getCantDigitos(ArrayList<int>* lista, int base) {
+    int res = 0;
+    for (lista->goToStart(); !lista->atEnd(); lista->next()) {
+        int num = lista->getElement();
+        if (num > res)
+            res = num;
     }
+    int digits = 1;
+    while (res) {
+        res /= base;
+        digits++;
+    }
+    return digits;
 }
 
 int main() {
@@ -89,32 +53,26 @@ int main() {
     string temp;
     string repetir = "s";
     try {
-        srand(time(0));
         while (repetir == "s" || repetir == "S") {
-            sizeLista = leerEntero("Tamano de la nueva lista: ");
-            if (sizeLista < 1)
-                throw runtime_error("Tamano debe ser mayor o igual 1.");
-            base = leerEntero("Base numerica: ");
-            if (base < 2)
-                throw runtime_error("La base debe ser mayor o igual a 2.");
+            cout << "Tamano de la lista: ";
+            getline(cin, temp);
+            sizeLista = stoi(temp);
+            cout << "Base numerica: ";
+            getline(cin, temp);
+            base = stoi(temp);
             Lista = new ArrayList<int>(sizeLista);
+            srand(time(0)); 
             for (int i = 0; i < sizeLista ; i++) {
-                int numeroRandom = rand() % 1000;
+                int numeroRandom = rand() % 10000;
                 Lista->append(numeroRandom);
             }
             cout << "Lista Random desordenada: ";
             Lista->print();
-            radixSort(Lista, base, sizeLista);
-            cout << "Lista ordenada: ";
-            Lista->print();
-            delete Lista;
-            cout << "\nDesea repetir? (s/n) ";
-            getline(cin >> ws, repetir);
+            radixSort(Lista, base);
         }
     }
     catch (const runtime_error& e) {
         cout << "ERROR: " << e.what() << endl;
     }
-    cout << "Gracias por usar el programa :)" << endl;
-    return 0;
+
 }
