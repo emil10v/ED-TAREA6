@@ -2,7 +2,7 @@
 Resultados de pruebas de rendimiento exclusivamente de la función radixsort:
 
 Tamaño de la lista   	Base 2  Base 10  Base 16  base 256
-1000			             2 ms	   0 ms	    1 ms	   1 ms
+1000			           2 ms	   0 ms	    1 ms	   1 ms
  
 10 000		           	22 ms	   8 ms	    6 ms	   3 ms
 
