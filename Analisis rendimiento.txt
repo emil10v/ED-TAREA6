@@ -1,0 +1,15 @@
+
+Resultados de pruebas de rendimiento exclusivamente de la función radixsort:
+
+Tamaño de la lista 	Base 2 	 Base 10  Base 16  base 256
+1000			2 ms	 0 ms	  1 ms	   1 ms
+
+10 000			22 ms	 8 ms	  6 ms	   3 ms
+
+50 000			123 ms	 41 ms	  35 ms	   19 ms
+
+100 000			249 ms	 86 ms	  66 ms	   35 ms
+
+Se puede observar que sin importar el tamaño de la lista el rendimiento mejora entre mayor sea la base debido a que  el algoritmo necesita menos recorridos por cada numero, pero el problema de esto es que la cantidad de memoria que requiere el algoritmo aumenta para guardar los buckets.
+
+Teniendo en cuenta esto mi recomendación es utilizar el algoritmo con bases medianas como 10 o 16 para tener un equilibrio entre tiempo de ejecución y consumo de memoria.
