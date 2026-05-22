@@ -1,4 +1,3 @@
 ﻿  Tarea6.cpp
-C:\Users\villa\OneDrive - Estudiantes ITCR\ESTRUCTURAS DE DATOS\Tareas\Tarea6\Tarea6.cpp(30,23): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-C:\Users\villa\OneDrive - Estudiantes ITCR\ESTRUCTURAS DE DATOS\Tareas\Tarea6\Tarea6.cpp(20,9): warning C4101: 'base': variable local sin referencia
+C:\Users\villa\OneDrive - Estudiantes ITCR\ESTRUCTURAS DE DATOS\Tareas\Tarea6\Tarea6.cpp(92,23): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
   Tarea6.vcxproj -> C:\Users\villa\OneDrive - Estudiantes ITCR\ESTRUCTURAS DE DATOS\Tareas\Tarea6\x64\Debug\Tarea6.exe
